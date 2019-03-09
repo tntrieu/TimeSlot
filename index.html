@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Slot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<h1>Available Time Slots: </h1>
+<div id="slotsDiv">
+  <button type="button" id="b1">9am-10am</button>
+  <button type="button" id="b2">10am-11am</button>
+  <button type="button" id="b3">11am-12pm</button>
+  <button type="button" id="b4">12pm-1pm</button>
+</div>
+
+  <!-- Modal Trigger -->
+  <button data-target="modal1" class="btn modal-trigger" id="btn1">9am - 10am</button>
+  <button data-target="modal1" class="btn modal-trigger" id="btn2">10am - 11am</button>      
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="input-field col s6">
+        <input placeholder="Name" id="name" type="text" class="validate">
+        <label for="first_name">Name: </label>
+      </div>
+      <div class="input-field col s6">
+        <input placeholder="Phone Number" id="phone_number" type="text" class="validate">
+        <label for="first_name">Phone Number: </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="ModalSubmit">Submit</a>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="slot.js"></script>
+</body>
+</html>
