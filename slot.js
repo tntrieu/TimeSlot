@@ -1,30 +1,7 @@
 
 
 var slotsList= new Array();
-//generate time slots
-$(document).ready(function(){
-  //var para= $('<button/>', { id: 'foo', class: 'tclose'})
-  var para = document.createElement("BUTTON", {"id":"btn3"});
 
-  var text = document.createTextNode("11am - 12pm");
-  para.appendChild(text);
-
-  var element = document.getElementById("slotsDiv");
-  element.appendChild(para);
-
-  var setClass = document.createAttribute("class");       // Create a "class" attribute
-  setClass.value = "btn modal-trigger"; 
-  para.setAttributeNode(setClass); 
-
-  para.setAttribute("data-target", "modal1");
-  //para.id="btn3";
-  para.setAttribute("id","btn3");
-
-  
-
-
-  //document.getElementById("slotsDiv").innerHTML = "<button data-target="modal1" class="btn modal-trigger" id="btn3">11am - 12pm</button>" 
-})
 //Modal Window
 document.addEventListener('DOMContentLoaded', function() { 
 
@@ -45,14 +22,12 @@ $('.btn').click('click', function(){
     for(var i=0; i<slotsList.length;i++){
       if(slotsList[i].btnId == capturedBtnId)
       {
-        console.log("found it!"+slotsList[i].name);
         document.getElementById("name").value = slotsList[i].name;
         document.getElementById("phone_number").value = slotsList[i].phoneNumber;
         break;
       }
     }
   }
-
 })
 
 
@@ -77,17 +52,11 @@ document.getElementById('ModalSubmit').addEventListener('click', function(){
       break;
     }
   }
-  console.log(foundIt);
+
   if(foundIt === "false" && slot.name !=="" && slot.phoneNumber !=="")
   {
     slotsList.push(slot);
     document.getElementById(capturedBtnId).style.backgroundColor = "red";
-  }
-
-
-  for(var i=0; i<slotsList.length;i++)
-  {
-    console.log(slotsList[i]);
   }
 
   cleanModal();
