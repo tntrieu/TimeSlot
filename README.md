@@ -1,6 +1,6 @@
 # TimeSlot
 
-1.Using your preferred Javascript framework, build a screen which shows a list of hour long slots from 9am to 5pm.
+1. Using your preferred Javascript framework, build a screen which shows a list of hour long slots from 9am to 5pm.
 
 2. When one time slot is clicked, pop up a modal which asks for name and phone number.
 
