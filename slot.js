@@ -1,66 +1,106 @@
 
 
 var slotsList= new Array();
+//generate time slots
+$(document).ready(function(){
+  //var para= $('<button/>', { id: 'foo', class: 'tclose'})
+  var para = document.createElement("BUTTON", {"id":"btn3"});
 
-function TimeSlot(_id, _time, _personName, _phoneNumber) {
-  var id = _id;
-  var time = _time;
-  var personName = _personName;
-  var phoneNumber = _phoneNumber;
+  var text = document.createTextNode("11am - 12pm");
+  para.appendChild(text);
 
-  this.addToSlotsList = function(slot){
-    slotsList.Push(slot);
-  }
+  var element = document.getElementById("slotsDiv");
+  element.appendChild(para);
 
-  this.getName = function() {
-    return name;
-  };
+  var setClass = document.createAttribute("class");       // Create a "class" attribute
+  setClass.value = "btn modal-trigger"; 
+  para.setAttributeNode(setClass); 
 
-  this.getPhoneNumber = function() {
-    return phoneNumber;
-  };
+  para.setAttribute("data-target", "modal1");
+  //para.id="btn3";
+  para.setAttribute("id","btn3");
 
-  this.FindInfoById = function(id){
-    var returnSlot = new TimeSlot();
-    console.log(slotsList[0]);
-    /*foreach(object slot in slotsList)
-    {
-      if(slot.id === id)
-      {
-        returnSlot.personName = slot.getName();
-        returnSlot.phoneNumber = slot.getPhoneNumber();
-      }
-    }*/
-    return returnSlot();
-  }
-}
+  
 
+
+  //document.getElementById("slotsDiv").innerHTML = "<button data-target="modal1" class="btn modal-trigger" id="btn3">11am - 12pm</button>" 
+})
 //Modal Window
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { 
+
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems);
   
 });
-/*
-document.addEventListener('click', function(){
-  instance.open();
+
+//capture the button who opens the modal window
+var capturedBtnId = "";
+$('.btn').click('click', function(){
+  capturedBtnId=$(this).attr('id');
+
+  //if slot already filled
+  if(document.getElementById(capturedBtnId).style.backgroundColor === "red")
+  {
+    console.log(capturedBtnId);
+    for(var i=0; i<slotsList.length;i++){
+      if(slotsList[i].btnId == capturedBtnId)
+      {
+        console.log("found it!"+slotsList[i].name);
+        document.getElementById("name").value = slotsList[i].name;
+        document.getElementById("phone_number").value = slotsList[i].phoneNumber;
+        break;
+      }
+    }
+  }
+
 })
-*/
+
+
+
+//submit event
 document.getElementById('ModalSubmit').addEventListener('click', function(){
-  var triggerElement = $(event.relatedTarget);
-  console.log(triggerElement);
+  
   var slot = 
   {
-    time: "9am-10am",
+    btnId: capturedBtnId,
     name: document.getElementById("name").value, 
-    phoneNumber : document.getElementById("phone_number").value
-  
+    phoneNumber : document.getElementById("phone_number").value  
   }
-  slotsList.push(slot);
-  document.getElementById('btn1').style.backgroundColor = "red";
 
-  console.log(slotsList[0]);
+  var foundIt= "false";
+  for(var i=0; i<slotsList.length;i++){
+    if(slotsList[i].btnId == capturedBtnId)
+    {
+      slotsList[i].name = document.getElementById("name").value;
+      slotsList[i].phoneNumber = document.getElementById("phone_number").value;
+      foundIt = "true";
+      break;
+    }
+  }
+  console.log(foundIt);
+  if(foundIt === "false" && slot.name !=="" && slot.phoneNumber !=="")
+  {
+    slotsList.push(slot);
+    document.getElementById(capturedBtnId).style.backgroundColor = "red";
+  }
+
+
+  for(var i=0; i<slotsList.length;i++)
+  {
+    console.log(slotsList[i]);
+  }
+
+  cleanModal();
 });
 
-//var instance = M.Modal.getInstance(elem);
-//instance.open();
+//close modal event
+document.getElementById('ModalClose').addEventListener('click', function(){
+  cleanModal();
+})
+
+//modal clean
+function cleanModal()
+{
+  document.getElementById('name').value = "";
+  document.getElementById('phone_number').value = "";
+}
